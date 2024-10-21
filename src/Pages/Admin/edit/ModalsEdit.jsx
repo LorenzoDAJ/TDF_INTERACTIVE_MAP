@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import ArrowIcon from '../../../assets/actions/Arrow_icon.png';
 import styles from '/src/Pages/Admin/edit/styles/ModalsEdit.module.scss'; // Ensure you have proper CSS
 
+import NavBar from './navBar/NavBar';
 import AccessBtn from '/src/Pages/Users/landing/signInModule/AccessBtn'; // Import the new AccessBtn component
 import '/src/Pages/Users/landing/signInModule/AccessBtn.module.scss';
 
@@ -158,77 +159,81 @@ const handleModalFileChange = (e) => {
   };
 
   return (
-<div className={styles.modalContainer}>
-  <div className={styles.Header}>
-  <h1>All Modals</h1>
-  <button className={styles.backButton} onClick={handleBackClick}>
-           <img src={ArrowIcon} alt="Back" className={styles.icon} />
-          </button>
-  </div>
-  <div className={styles.modalsList}>
-    {modals.map((modal) => (
-      <div key={modal._id}>
-        <h3>{modal.title}</h3>
-        <button onClick={() => handleEditClick(modal)}>Edit</button>
+  <>
+    <NavBar />  
+  
+    <div className={styles.modalContainer}>
+      <div className={styles.Header}>
+      <h1>All Modals</h1>
+      <button className={styles.backButton} onClick={handleBackClick}>
+              <img src={ArrowIcon} alt="Back" className={styles.icon} />
+              </button>
       </div>
-    ))}
-  </div>
-
-  {currentModal && (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modalEditingSection}>
-        <label>
-          Edit Modal:
-          <h2>{currentModal.title}</h2>
-        </label>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Description:
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-          </label>
-
-          <div className={styles.imageUploadContainer}>
-            <h3>Upload Images:</h3>
-            <input
-              type="file"
-              accept="image/jpeg, image/jpg, image/png"
-              multiple
-              onChange={handleModalFileChange}
-            />
+      <div className={styles.modalsList}>
+        {modals.map((modal) => (
+          <div key={modal._id}>
+            <h3>{modal.title}</h3>
+            <button onClick={() => handleEditClick(modal)}>Edit</button>
           </div>
-
-          {modalImagePreviews.length > 0 && (
-            <div className={styles.imageCarousel}>
-              <Slider {...settings}>
-                {modalImagePreviews.map((image, index) => (
-                  <div key={index} className="slick-slide">
-                    <img
-                      src={image}
-                      alt={`Uploaded preview ${index}`}
-                      className={styles.carouselImage}
-                    />
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          )}
-
-              <button className={styles.saveBtn} type="submit">Save</button>
-              {/* Add a Close button to close the modal */}
-              <button className={styles.closeBtn} type="button" onClick={closeModal}>Close</button>
-            </form>
-          </div>
-        </div>
-      )}
-      {/* Button container for absolute positioning */}
-      <div className={styles.accessBtnContainer}>
-            <AccessBtn user={user} /> {/* Pass user as prop if needed */}
-        </div>
+        ))}
     </div>
+
+    {currentModal && (
+      <div className={styles.modalOverlay}>
+        <div className={styles.modalEditingSection}>
+          <label>
+            Edit Modal:
+            <h2>{currentModal.title}</h2>
+          </label>
+          <form onSubmit={handleSubmit}>
+            <label>
+              Description:
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              />
+            </label>
+
+            <div className={styles.imageUploadContainer}>
+              <h3>Upload Images:</h3>
+              <input
+                type="file"
+                accept="image/jpeg, image/jpg, image/png"
+                multiple
+                onChange={handleModalFileChange}
+              />
+            </div>
+
+            {modalImagePreviews.length > 0 && (
+              <div className={styles.imageCarousel}>
+                <Slider {...settings}>
+                  {modalImagePreviews.map((image, index) => (
+                    <div key={index} className="slick-slide">
+                      <img
+                        src={image}
+                        alt={`Uploaded preview ${index}`}
+                        className={styles.carouselImage}
+                      />
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            )}
+
+                <button className={styles.saveBtn} type="submit">Save</button>
+                {/* Add a Close button to close the modal */}
+                <button className={styles.closeBtn} type="button" onClick={closeModal}>Close</button>
+              </form>
+            </div>
+          </div>
+        )}
+        {/* Button container for absolute positioning */}
+        {/* <div className={styles.accessBtnContainer}>
+            <AccessBtn user={user} /> {/* Pass user as prop if needed
+        </div> */}
+      </div>
+  </>
   );
 };
 

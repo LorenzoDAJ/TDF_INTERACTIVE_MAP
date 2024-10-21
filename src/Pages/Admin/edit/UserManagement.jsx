@@ -5,6 +5,7 @@ import { useAuth } from '/src/Pages/Admin/ACMfiles/authContext';
 import styles from  '/src/Pages/Admin/edit/styles/UserManagement.module.scss';  // Import CSS
 import UserModal from './UserModal'; // Component for handling modal input
 
+import NavBar from './navBar/NavBar';
 import AccessBtn from '/src/Pages/Users/landing/signInModule/AccessBtn'; // Import the new AccessBtn component
 import '/src/Pages/Users/landing/signInModule/AccessBtn.module.scss';
 
@@ -76,44 +77,47 @@ const UserManagement = () => {
 
 
     return (
-        <div>
-        <h2 className={styles.header}>User Management</h2>
-        <button className={styles.btn} onClick={() => openModal()}>Add User</button>
-        <table className={styles.table}>
-<thead>
-    <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Password</th>
-        <th>Role</th>
-        <th>Created At</th>
-        <th>Updated At</th>
-        <th>Actions</th>
-    </tr>
-</thead>
-<tbody>
-    {users.map(user => (
-        <tr key={user._id}>
-            <td>{user.name}</td>
-            <td>{user.email}</td>
-            <td>{user.password}</td>
-            <td>{user.role}</td>
-            <td>{new Date(user.createdAt).toLocaleString()}</td>
-            <td>{new Date(user.updatedAt).toLocaleString()}</td>
-            <td>
-                <button className = {styles.editBtn} onClick={() => openModal(user)}>Edit</button>
-                <button className = {styles.delBtn} onClick={() => handleDeleteUser(user._id)}>Delete</button>
-            </td>
-            </tr>
-        ))}
-    </tbody>
-</table>
-            {modalOpen && <UserModal user={currentUser} onSave={handleAddOrUpdateUser} onClose={() => setModalOpen(false)} />}
-                 {/* Button container for absolute positioning */}
-      <div className={styles.accessBtnContainer}>
-            <AccessBtn userProp={user} /> {/* Pass user as prop if needed */}
-        </div>
-        </div>
+        <>
+            <NavBar />
+            <div>
+                <h2 className={styles.header}>User Management</h2>
+                <button className={styles.btn} onClick={() => openModal()}>Add User</button>
+                <table className={styles.table}>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Role</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users.map(user => (
+                            <tr key={user._id}>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
+                                <td>{user.password}</td>
+                                <td>{user.role}</td>
+                                <td>{new Date(user.createdAt).toLocaleString()}</td>
+                                <td>{new Date(user.updatedAt).toLocaleString()}</td>
+                                <td>
+                                    <button className = {styles.editBtn} onClick={() => openModal(user)}>Edit</button>
+                                    <button className = {styles.delBtn} onClick={() => handleDeleteUser(user._id)}>Delete</button>
+                                </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    {modalOpen && <UserModal user={currentUser} onSave={handleAddOrUpdateUser} onClose={() => setModalOpen(false)} />}
+                        {/* Button container for absolute positioning */}
+                {/* <div className={styles.accessBtnContainer}>
+                    <AccessBtn userProp={user} /> {/* Pass user as prop if needed
+                </div> */}
+            </div>
+        </>
     );
     
 };

@@ -3,6 +3,8 @@ import axios from 'axios';
 import styles from './styles/AudioManagement.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AudioUpload from './AudioUpload';
+
+import NavBar from './navBar/NavBar';
 import AccessBtn from '/src/Pages/Users/landing/signInModule/AccessBtn'; // Import the new AccessBtn component
 import '/src/Pages/Users/landing/signInModule/AccessBtn.module.scss';
 
@@ -119,64 +121,68 @@ const AudioManagement = () => {
   };
 
   return (
-    <div className={styles.audioManagementContainer}>
-     <div className={styles.tableHeader}>
-        <h1>Audio Management</h1>
-        <button className={styles.uploadButton} onClick={handleOpenModal}>
-          Upload
-        </button>
-        <button className={styles.navigateButton} onClick={() => navigate('/map')}>
-           Go to Admin Page
-        </button>
-      </div>
-
-      <table className={styles.audioManagementTable}>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>File Name</th>
-            <th>Play</th>
-            <th>Update</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {audios.map((audio) => (
-            <tr key={audio._id}>
-              <td>{audio.title}</td>
-              <td>{audio.originalName}</td>
-              <td>
-                <button onClick={() => handlePlayAudio(audio.filePath, audio._id)}>Play</button>
-              </td>
-              <td>
-                <button onClick={() => handleUpdate(audio._id)}>Update</button>
-              </td>
-              <td>
-                <button onClick={() => handleDelete(audio._id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Modal for AudioUpload */}
-      {showUploadModal && (
-        <div className={styles.modal}>
-        <div className={styles.modalContent}>
-          <span className={styles.closeButton} onClick={handleCloseModal}>
-              &times;
-            </span>
-            <AudioUpload onClose={handleCloseModal} />
-          </div>
+    <>
+      <NavBar />
+      <div className={styles.audioManagementContainer}>
+        <div className={styles.tableHeader}>
+          <h1>Audio Management</h1>
+          <button className={styles.uploadButton} onClick={handleOpenModal}>
+            Upload
+          </button>
+          <button className={styles.navigateButton} onClick={() => navigate('/map')}>
+            Go to Admin Page
+          </button>
         </div>
-      )}
-            {/* Button container for absolute positioning */}
-        <div className={styles.accessBtnContainer}>
-        <AccessBtn user={user} /> {/* Pass user as prop if needed */}
+
+        <table className={styles.audioManagementTable}>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>File Name</th>
+              <th>Play</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {audios.map((audio) => (
+              <tr key={audio._id}>
+                <td>{audio.title}</td>
+                <td>{audio.originalName}</td>
+                <td>
+                  <button onClick={() => handlePlayAudio(audio.filePath, audio._id)}>Play</button>
+                </td>
+                <td>
+                  <button onClick={() => handleUpdate(audio._id)}>Update</button>
+                </td>
+                <td>
+                  <button onClick={() => handleDelete(audio._id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {/* Modal for AudioUpload */}
+        {showUploadModal && (
+          <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <span className={styles.closeButton} onClick={handleCloseModal}>
+                &times;
+              </span>
+              <AudioUpload onClose={handleCloseModal} />
+            </div>
+          </div>
+        )}
+          {/* Button container for absolute positioning */}
+          {/* <div className={styles.accessBtnContainer}>
+            <AccessBtn user={user} /> {/* Pass user as prop if needed
+          </div> */}
+
+        {/* Audio player */}
+        <audio ref={audioRef} hidden />
       </div>
-      {/* Audio player */}
-      <audio ref={audioRef} hidden />
-    </div>
+    </>
   );
   
 };

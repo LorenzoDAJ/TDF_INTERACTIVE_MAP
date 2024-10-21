@@ -4,6 +4,8 @@ import ArrowIcon from '../../../assets/actions/Arrow_icon.png';
 //import { useParams } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+import NavBar from './navBar/NavBar';
 import AccessBtn from '/src/Pages/Users/landing/signInModule/AccessBtn'; // Import the new AccessBtn component
 import '/src/Pages/Users/landing/signInModule/AccessBtn.module.scss';
 
@@ -123,6 +125,8 @@ const handleSubmit = async (e) => {
  
 
   return (
+    <>
+      <NavBar />
       <div className={styles.cardsContainer}>
         <div className={styles.header}>
         <h1>Edit Cards</h1>
@@ -161,12 +165,13 @@ const handleSubmit = async (e) => {
           </div>
         </form>
         {/* Button container for absolute positioning */}
-        <div className={styles.accessBtnContainer}>
-            <AccessBtn user={user} /> {/* Pass user as prop if needed */}
-        </div>
+        
+        {/* <div className={styles.accessBtnContainer}>
+            <AccessBtn user={user} /> {/* Pass user as prop if needed 
+        </div> */}
 
       </div>
-      
+    </>
 
 
     
