@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import styles from './Popup.module.scss';
 import icon from '../../../../../../assets/Icon.js';  
+import icons from '../../../../../../assets/for_landingPage/Icons.jsx';
+import images from '../../../../../../assets/for_landingPage/Images.jsx';
 import Time from './Time.jsx';
 import Modal from "./modal/Modal.jsx";
 import axios from 'axios';
@@ -46,56 +48,52 @@ function Popup({ modalId ,marker, onClose, isAdmin=true }) {
   return (
     <>
       <div
-          id="popup"
-          className={styles.popupContent}
-          style={{ position: "absolute", zIndex: 100 }}>
-            { /*
-              isAdmin && <a href="/administrator">Edit</a>
-            */}
-          <div className={styles.closeBtn} onClick={onClose}>
-              <button>
-                  <img src={icon.actions.close} alt="close" />
-              </button>
+        id="popup"
+        className={styles.popupContent}
+        style={{ position: "absolute", zIndex: 100 }}
+      >
+        { /*
+          isAdmin && <a href="/administrator">Edit</a>
+        */}
+        <div className={styles.closeBtn} onClick={onClose}>
+            <button>
+                <img src={icons.close} alt="close" />
+            </button>
+        </div>
+
+        <div className={styles.popupImage}>
+            <img src={images.image1} alt={marker.name}/> {/* tempoorary replace the marker.img for visualization */}
+        </div>
+
+        <div className={styles.cont1}>
+          <div className={styles.btns}>
+            <button>
+              <img src={icon.actions.wayfind} alt="wayfind" />
+            </button>
+            <button>
+              <img src={icon.actions.speaker} alt="speaker" />
+            </button>
           </div>
-          <div className={styles.popupImage}>
-              <img src={marker.img} alt={marker.name}/>
-          </div>
-          <div className={styles.cont1}>
-                  <h1>{marker.name}</h1>
-                  <div className={styles.weather}>
-                    <div className={styles.logo}>
-                      <img src={icon.weather.cloudy} alt="weatherIcon" />
-                    </div>
-                    <div className={styles.weatherDeets}>
-                      <p>Mildly sunny - 14°</p>
-                      <Time />
-                    </div>
-                  </div>
-          </div>
-          <hr />
-          <div className={styles.cont2}>
-                  <h2>Quick Facts</h2>
-                  <div className={styles.btns}>
-                    <button>
-                      <img src={icon.actions.wayfind} alt="wayfind" />
-                    </button>
-                    <button>
-                      <img src={icon.actions.speaker} alt="speaker" />
-                    </button>
-                  </div>
-          </div>
-          <p>{marker.quickFacts}</p>
+
+          <span className = {styles.txtTitle} >{marker.name}</span>
+
+          <div className = { styles.line }></div>
+
+          <p className = { styles.quickFacts } >{marker.quickFacts}</p>
+
           <div className={styles.fullDeets}>
-          <button className={styles.deets} onClick={onViewFullDetail}>
-          <p>View Full Details {'>'}</p>
-        </button>
-       {/*  <button
-          className={styles.deets}
-          onClick={()=> onViewFullDetail(marker)}>
-              <p>View Full Details {'>'}</p>
-          </button> */
-          } 
+            <button className={styles.deets} onClick={onViewFullDetail}>
+              <p>View Full Details &nbsp; {'>'}</p>
+            </button>
+            {/*  <button
+            className={styles.deets}
+            onClick={()=> onViewFullDetail(marker)}>
+                <p>View Full Details {'>'}</p>
+            </button> */
+            } 
           </div>
+        </div>
+
       </div>
       {isOpen && modalData && <Modal modalId={modalId} modalData={modalData} onClose={onCloseModal} />}
 
