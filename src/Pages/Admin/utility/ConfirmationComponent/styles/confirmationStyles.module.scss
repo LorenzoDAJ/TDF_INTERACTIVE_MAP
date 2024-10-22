@@ -1,0 +1,61 @@
+@import '../../../../Users/landing/signInModule/stylesVariables.scss';
+@import '../../../../Users/landing/signInModule/global.scss';
+
+.container {
+    background-color: pink;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
+    margin: 0 10px;
+    max-width: 400px;
+    padding: 20px 30px;
+    
+    .content {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+
+        .txtTitle {
+            font-size: 30px;
+        }
+
+        .txtSubTitle {
+            line-height: 1.2;  
+            margin: 5px 0;
+        }
+
+        .btns {
+            display: flex;
+            gap: 30px;
+            font-size: 10px;
+            margin-top: 25px;
+
+            .delete, .cancel {
+                border-radius: 30px;
+                padding: 2px 35px;
+                transition: all 0.2s ease-in-out;
+
+                button {
+                    font-size: 15px;
+                }
+
+                &:hover {
+                    scale: 1.1;
+                }
+            }
+            
+            .delete {
+                background-color: $danger;
+
+                button {
+                    color: $tertiary;
+                }
+            }
+
+            .cancel {
+                background-color: $outOfFocus;
+            }
+        }
+    }
+}

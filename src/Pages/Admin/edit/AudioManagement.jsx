@@ -4,7 +4,9 @@ import styles from './styles/AudioManagement.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AudioUpload from './AudioUpload';
 
+import icons from "../../../assets/for_landingPage/Icons";
 import NavBar from './navBar/NavBar';
+import Confirmation from '../utility/ConfirmationComponent/Confirmation';
 import AccessBtn from '/src/Pages/Users/landing/signInModule/AccessBtn'; // Import the new AccessBtn component
 import '/src/Pages/Users/landing/signInModule/AccessBtn.module.scss';
 
@@ -124,44 +126,49 @@ const AudioManagement = () => {
     <>
       <NavBar />
       <div className={styles.audioManagementContainer}>
-        <div className={styles.tableHeader}>
-          <h1>Audio Management</h1>
-          <button className={styles.uploadButton} onClick={handleOpenModal}>
-            Upload
-          </button>
-          <button className={styles.navigateButton} onClick={() => navigate('/map')}>
-            Go to Admin Page
-          </button>
+
+        <div className={styles.header}>
+          <span className = { styles.txtTitle }>Audio Management</span>
         </div>
 
-        <table className={styles.audioManagementTable}>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>File Name</th>
-              <th>Play</th>
-              <th>Update</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {audios.map((audio) => (
-              <tr key={audio._id}>
-                <td>{audio.title}</td>
-                <td>{audio.originalName}</td>
-                <td>
-                  <button onClick={() => handlePlayAudio(audio.filePath, audio._id)}>Play</button>
-                </td>
-                <td>
-                  <button onClick={() => handleUpdate(audio._id)}>Update</button>
-                </td>
-                <td>
-                  <button onClick={() => handleDelete(audio._id)}>Delete</button>
-                </td>
+        <div className = { styles.tblWrapper}>
+          <table className={styles.audioManagementTable}>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Title</th>
+                <th>File Name</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {audios.map((audio) => (
+                <tr key={audio._id}>
+                  <td>
+                    <button 
+                      onClick={() => handlePlayAudio(audio.filePath, audio._id)}
+                      className = { styles.playBtn }
+                    >
+                      <img className = { `${ styles.icon } ${ styles.play}` } src = { icons.audio } alt = "Play Audio" />
+                    </button>
+                  </td>
+                  <td>{audio.title}</td>
+                  <td>{audio.originalName}</td>
+                  <td>
+                    <div className = { styles.actionBtns }>
+                      <button onClick={() => handleUpdate(audio._id)}>
+                        <img className = { `${ styles.icon } ${ styles.pencil}` } src = { icons.pencil } alt = "Edit Item" />
+                      </button>
+                      <button onClick={() => handleDelete(audio._id)}>
+                        <img className = { `${ styles.icon } ${ styles.delete}` } src = { icons.remove } alt = "Delete Item" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         {/* Modal for AudioUpload */}
         {showUploadModal && (
@@ -182,6 +189,7 @@ const AudioManagement = () => {
         {/* Audio player */}
         <audio ref={audioRef} hidden />
       </div>
+      {/* <Confirmation /> */}
     </>
   );
   
