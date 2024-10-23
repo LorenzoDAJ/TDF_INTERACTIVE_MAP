@@ -2,7 +2,6 @@
 @import "../../../Users/landing/signInModule/stylesVariables.scss";
 
 .audioManagementContainer {
-  margin: 0 auto;
 
   .header {
     align-items: center;
@@ -24,7 +23,6 @@
 
     .audioManagementTable {
       border-collapse: collapse;
-      overflow-y: hidden;
       table-layout: fixed;
       width: 100%;
   
