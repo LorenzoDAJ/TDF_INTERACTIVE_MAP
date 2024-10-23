@@ -27,16 +27,17 @@
         align-self: center;
         margin-top: 20px;
     }
+    
+    label {
+        font-family: $subTitle;
+    }
+    
+    input {
+        border: 1.5px solid black; 
+        border-radius: 5px;
+        height: 28px;
+        margin-bottom: 20px;
+        min-width: 17rem;
+    }
 }
 
-label {
-    font-family: $subTitle;
-}
-
-input {
-    border: 1.5px solid black; 
-    border-radius: 5px;
-    height: 28px;
-    margin-bottom: 20px;
-    min-width: 17rem;
-}
