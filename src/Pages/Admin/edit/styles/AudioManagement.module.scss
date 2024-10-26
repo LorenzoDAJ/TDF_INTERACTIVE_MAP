@@ -2,6 +2,9 @@
 @import "../../../Users/landing/signInModule/stylesVariables.scss";
 
 .audioManagementContainer {
+  height: 100%;
+  overflow-x: hidden;
+  width: 100%;
 
   .header {
     align-items: center;
@@ -62,99 +65,44 @@
   }
 }
 
+.confirmation, .modal {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  z-index: 5;
+}
 
-// .audioManagementContainer {
-//   width: 100%;
-//   padding: 20px;
-// }
+@media (min-width: 992px) {
+  .audioManagementContainer {
+      .header {
+          border-radius: 0 0 150px 0;
+          padding: 80px 0;
 
-// .tableHeader {   //.header in current version
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   margin-bottom: 20px;
+          .txtTitle {
+              font-size: 40px;
+          }
+      }
 
-//   h1 {
-//     margin: 0;
-//   }
-// }
+    .tblWrapper {
 
-// .uploadButton {
-//   background-color: #007bff;
-//   color: white;
-//   border: none;
-//   padding: 10px 20px;
-//   font-size: 16px;
-//   border-radius: 5px;
-//   cursor: pointer;
+      .audioManagementTable {
+        th, td {
+          font-size: 15px;
+        }
 
-//   &:hover {
-//     background-color: #0056b3;
-//   }
-// }
+        .playBtn {
+          padding: 10px;
+        }
 
-// .audioManagementTable {
-//   width: 100%;
-//   border-collapse: collapse;
-
-//   th, td {
-//     border: 1px solid #ddd;
-//     padding: 8px;
-//     text-align: left;
-//   }
-
-//   th {
-//     background-color: #f2f2f2;
-//   }
-
-//   tr:nth-child(even) {
-//     background-color: #f9f9f9;
-//   }
-
-//   tr:hover {
-//     background-color: #ddd;
-//   }
-
-//   td button {
-//     background-color: #28a745;
-//     color: white;
-//     border: none;
-//     padding: 5px 10px;
-//     border-radius: 3px;
-//     cursor: pointer;
-
-//     &:hover {
-//       background-color: #218838;
-//     }
-//   }
-// }
-
-// .navigateButton {
-//   background-color: #4caf50;
-//   color: white;
-//   padding: 10px 20px;
-//   border: none;
-//   border-radius: 5px;
-//   cursor: pointer;
-//   margin-left: 10px;
-// }
-
-// .navigateButton:hover {
-//   background-color: #45a049;
-// }
-
-// .audioManagementTable th, .audioManagementTable td {
-//   text-align: center;
-// }
-
-// .audioManagementTable button {
-//   margin: 2px;
-// }
-
-// .audioManagementTable .updateButton {
-//   background-color: #007bff;
-// }
-
-// .audioManagementTable .deleteButton {
-//   background-color: #dc3545;
-// }
+        .icon {
+          height: 23px;
+          width: 23px;
+        }
+      }
+    }   
+  }
+}

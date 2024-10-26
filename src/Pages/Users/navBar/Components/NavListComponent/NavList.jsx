@@ -38,7 +38,7 @@ export default function NavList ({ handleClickOutside, isHamClicked, isNavListCl
                 <motion.section 
                     id = "navigationList" 
                     className = { styles.navBarList }
-                    initial = {{opacity: 0, translateY: 120, translateX: 20}}
+                    initial = {(window.innerHeight > 800 && window.innerWidth > 992) ? {translateY: 120, translateX: 20, opacity: 0} : {translateY: 80, translateX: 20, opacity: 0}}
                     animate = {{opacity: 1,}}
                     exit = {{
                         opacity: 0, 
@@ -192,7 +192,7 @@ export default function NavList ({ handleClickOutside, isHamClicked, isNavListCl
                                         }
                                         transition = {{duration: 0.2, delay: 0.18 * 5, ease: "easeInOut"}}
                                     >
-                                        <img className = { `${styles.icon} ${styles.feedback}` } src = { icons.feedback } alt = "Submit Feedback" />
+                                        <img className = { `${styles.icon} ${styles.feedback}` } src = { icons.card } alt = "Submit Feedback" />
                                         <span className = { styles.text }>Edit Cards</span>
                                     </motion.li>
                                 )}
@@ -214,7 +214,7 @@ export default function NavList ({ handleClickOutside, isHamClicked, isNavListCl
                                         }
                                         transition = {{duration: 0.2, delay: 0.18 * 6, ease: "easeInOut"}}
                                     >
-                                        <img className = { `${styles.icon} ${styles.feedback}` } src = { icons.feedback } alt = "Submit Feedback" />
+                                        <img className = { `${styles.icon} ${styles.feedback}` } src = { icons.edit } alt = "Submit Feedback" />
                                         <span className = { styles.text }>Edit Modal</span>
                                     </motion.li>
                                 )}
@@ -236,7 +236,7 @@ export default function NavList ({ handleClickOutside, isHamClicked, isNavListCl
                                         }
                                         transition = {{duration: 0.2, delay: 0.18 * 7, ease: "easeInOut"}}
                                     >
-                                        <img className = { `${styles.icon} ${styles.feedback}` } src = { icons.feedback } alt = "Submit Feedback" />
+                                        <img className = { `${styles.icon} ${styles.feedback}` } src = { icons.upload } alt = "Submit Feedback" />
                                         <span className = { styles.text }>Edit Audio</span>
                                     </motion.li>
                                 )}
@@ -263,7 +263,7 @@ export default function NavList ({ handleClickOutside, isHamClicked, isNavListCl
                                         }
                                         transition = {{duration: 0.2, delay: 0.18 * 8, ease: "easeInOut"}}
                                     >
-                                        <img className = { `${styles.icon} ${styles.feedback}` } src = { icons.feedback } alt = "Submit Feedback" />
+                                        <img className = { `${styles.icon} ${styles.feedback}` } src = { icons.profile } alt = "Submit Feedback" />
                                         <span className = { styles.text }>User Management</span>
                                     </motion.li>
                                 )}

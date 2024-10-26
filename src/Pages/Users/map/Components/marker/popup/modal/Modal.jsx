@@ -154,6 +154,7 @@ const Modal = ({ onClose, details, modalData }) => {
               <AnimatePresence mode="wait">
                 {!isInfo && (
                   <motion.button 
+                    key = {"playAudio"}
                     className = { styles.speaker } 
                     onClick={() => onClickAudio(modalData.modal_id)} 
                     disabled={isPlaying}
@@ -162,7 +163,7 @@ const Modal = ({ onClose, details, modalData }) => {
                     exit = {{opacity: 0}}
                     transition = {{duration: 0.2, ease: "easeInOut"}}
                   >
-                    <img class= { styles.icon } src={icon.actions.speaker} alt="speaker" />
+                    <img className = { styles.icon } src={icon.actions.speaker} alt="speaker" />
                     {isPlaying && <span> Playing...</span>} {/* Optional message */}
                   </motion.button>
                 )} 

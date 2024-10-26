@@ -122,24 +122,55 @@ const handleSubmit = async (e) => {
     navigate(`/map`); // Navigate to the specific card display page
   };
 
- 
+  // Get the root ID and and apply className 
+  useEffect(() => {
+    const rootDiv = document.getElementById("root");
+
+    // Add or remove className based on current page
+
+    if (location.pathname === "/cards") {
+      rootDiv.classList.add(styles.rootDiv);
+    } else {
+      rootDiv.classList.remove(styles.rootDiv);
+    }
+  }, [location])
+
 
   return (
     <>
       <NavBar />
       <div className={styles.cardsContainer}>
-        <div className={styles.header}>
-        <h1>Edit Cards</h1>
-        <button className={styles.backButton} onClick={handleBackClick}>
-           <img src={ArrowIcon} alt="Back" className={styles.icon} />
-          </button>
+        <div className = { styles.header }>
+          <span className = { styles.txtTitle }>EDIT CARDS</span>
         </div>
-        <form onSubmit={handleSubmit}>
+
+        <span className = { `${ styles.txtTitle} ${ styles.listHeader }` }>Select Card</span>
+        {/* List selection reference */}
+        {/* <div className={styles.modalsList}>
+        {modals.map((modal) => (
+          <div className = { styles.infoContainer } key={modal._id}>
+            <span className = { styles.txtTitle }>{modal.title}</span>
+            <button onClick={() => handleEditClick(modal)}>Edit</button>
+          </div>
+        ))}
+        </div> */}
+
+        {/* Possible list Selection */}
+        <div className={styles.cardsList}>
+        {cards.map((card) => (
+          <div className = { styles.infoContainer } key={card._id}>
+            <span className = { styles.txtTitle }>{card.areaName}</span>
+            <button onClick={() => handleEditClick(card)}>Edit</button>
+          </div>
+        ))}
+        </div>
+
+        {/* <form onSubmit={handleSubmit}>
           {cards.map(card => (
             <div key={card._id} className={styles.card}>
-              <h3>{card.areaName}</h3>
+              <h3>{card.areaName}</h3> */}
 
-              <div className={styles.imageUpload}>
+              {/* <div className={styles.imageUpload}>
                 <label htmlFor={`image-upload-${card._id}`}>Upload Image</label>
                 <input
                   type="file"
@@ -157,20 +188,21 @@ const handleSubmit = async (e) => {
                   value={card.quickFacts}
                   onChange={(e) => handleQuickFactsChange(e, card._id)}
                 />
-              </div>
+              </div> */}
             </div>
-          ))}
-          <button className={styles.submitBtn} type="submit">Save Changes</button>
-          <div className={styles.navigationButton}>
-          </div>
-        </form>
+          {/* ))} */}
+          {/* Relocate this button */}
+          {/* <button className={styles.submitBtn} type="submit">Save Changes</button> */}
+          {/* <div className={styles.navigationButton}>
+          </div> */}
+        {/* </form> */}
         {/* Button container for absolute positioning */}
         
         {/* <div className={styles.accessBtnContainer}>
             <AccessBtn user={user} /> {/* Pass user as prop if needed 
         </div> */}
 
-      </div>
+      {/* </div> */}
     </>
 
 

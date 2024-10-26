@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './styles/AudioUpload.module.scss';
+import icons from "../../../assets/for_landingPage/Icons";
 
 const AudioUpload = ({ onClose }) => {
   const [title, setTitle] = useState(''); // For storing the title of the audio
@@ -11,7 +12,12 @@ const AudioUpload = ({ onClose }) => {
 
   // Handler for file input change
   const handleFileChange = (e) => {
-    setAudioFile(e.target.files[0]); // Set the selected file to state
+    const file = e.target.files[0]; // Set the selected file to state
+    if (file) {
+      setAudioFile(file.name);
+    } else {
+      setAudioFile("");
+    }
   };
 
   // Handler for form submission
@@ -62,42 +68,64 @@ const AudioUpload = ({ onClose }) => {
   };
 
   return (
-    <div className={styles.modalOverlay}> {/* Overlay to cover the screen */}
-      <div className={styles.modalContent}> {/* Modal content container */}
-        <span className={styles.closeButton} onClick={handleClose}>
-          &times; {/* Close button */}
+    <div className={styles.modalContent}> {/* Modal content container */}
+      <button className = { styles.close } onClick = { onClose }>
+          <img src={icons.close} alt="close" />
+      </button>
+      <div className = { styles.header }>
+        <span className = { styles.txtTitle }>
+          UPLOAD AUDIO FILE
         </span>
-        <form onSubmit={handleSubmit} className={styles.formContainer}>
-          <h1>Upload Audio File</h1>
-          <label>Audio Title: </label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)} // Update the title state when the input changes
-            placeholder="Enter audio title" required
-          />
-          <input type="file" onChange={handleFileChange} required />
-          <button type="submit">Upload</button>
-          <button type="button" onClick={handleClose}>Cancel</button>
-        </form>
-
-        {message && <p>{message}</p>}
-
-        {showConfirmation && (
-          <div className={styles.confirmationContainer}>
-            <p>An audio file named "{title}" already exists. Do you wish to replace it?</p>
-            <button onClick={handleConfirmReplace}>Continue</button>
-            <button onClick={() => setShowConfirmation(false)}>No</button>
-          </div>
-        )}
-
-        {showSuccess && (
-          <div className={styles.messageContainer}>
-            <p>File uploaded successfully: {title}</p>
-            <button onClick={handleClose}>OK</button>
-          </div>
-        )}
       </div>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <label className = { styles.customLabel }>
+          {/* Just a visual representation of the input tag */}
+          <button className = { styles.browseBtn }>Browse...</button>
+          <span className = { styles.fileName }>
+            { audioFile || "No file selected" }
+          </span>
+          {/* Hidden */}
+          <input 
+            className = { styles.input }
+            type="file" 
+            onChange={handleFileChange} 
+            required 
+          />
+        </label>
+        
+        <div className = { styles.btns }>
+          <button 
+            className = { `${styles.saveBtn} ${styles.txtTitle}` } 
+            type="submit"
+          >
+            Save
+          </button>
+          <button 
+            className = { `${styles.cancelBtn} ${styles.txtTitle}` } 
+            type="button" 
+            onClick={handleClose}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+
+      {message && <p>{message}</p>}
+
+      {showConfirmation && (
+        <div className={styles.confirmationContainer}>
+          <p>An audio file named "{title}" already exists. Do you wish to replace it?</p>
+          <button onClick={handleConfirmReplace}>Continue</button>
+          <button onClick={() => setShowConfirmation(false)}>No</button>
+        </div>
+      )}
+
+      {showSuccess && (
+        <div className={styles.messageContainer}>
+          <p>File uploaded successfully: {title}</p>
+          <button onClick={handleClose}>OK</button>
+        </div>
+      )}
     </div>
   );
 };

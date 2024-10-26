@@ -14,16 +14,16 @@
             color: $secondary;
             display: flex;
             font-family: $title;
-            font-size: 20px;
-            margin: 15px 0;
-            padding: 15px 20px;
+            font-size: 11px;
+            margin: 12px 0;
+            padding: 5px 10px;
             width: 100%;
 
             .icon {
                 filter: invert(10%) sepia(33%) saturate(3192%) hue-rotate(225deg) brightness(81%) contrast(100%); // change the icon color to $secondary
-                height: 30px;
+                height: 15px;
                 transition: all 0.2s ease-in-out;
-                width: 30px;
+                width: 15px;
             }
 
             .text {
@@ -59,5 +59,25 @@
             }
         }
         
+    }
+}
+
+// RESPONSIVE DESIGN
+
+@media (min-height: 800px) {
+
+    .navBarList {
+        .navList {
+            li {
+                font-size: 20px;
+                margin: 15px 0;
+                padding: 15px 20px;
+    
+                .icon {
+                    height: 30px;
+                    width: 30px;
+                }
+            }
+        }
     }
 }

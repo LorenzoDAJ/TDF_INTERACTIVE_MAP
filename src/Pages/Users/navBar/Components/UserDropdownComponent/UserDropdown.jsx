@@ -45,8 +45,8 @@ export default function UserDropdown({ handleClickOutside, isDropClicked }) {
             <AnimatePresence>
                 {isDropClicked && (
                     <motion.div
-                        initial = {{opacity: 0, translateY: 70, translateX: -37}}
-                        animate = {{opacity: 1, translateY: 120}}
+                        initial = {window.innerWidth > 992 ? {opacity: 0, translateY: 70, translateX: -37} : {opacity: 0, translateY: 70, translateX: -10}}
+                        animate = {window.innerWidth > 992 ? {opacity: 1, translateY: 120} : {opacity: 1, translateY: 100}}
                         exit = {{opacity: 0, translateY: 70}}
                         transition = {{ duration: 0.3, ease: "easeInOut"}}
                     

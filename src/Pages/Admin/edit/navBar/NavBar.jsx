@@ -33,7 +33,7 @@ export default function NavBar () {
 
                     //for mobile animation
                     initial = {{ translateX: -179.2 }}
-                    animate = { isNavBarActive ? { translateX: 0} : { translateX: -179.2}}
+                    animate = { isNavBarActive || window.innerWidth > 767.99 ? { translateX: 0} : { translateX: -179.2}}
                     transition = {{ duration: 0.3, ease: "easeInOut" }}
                 >
                     <div className = { styles.menu } onClick = { handleMenuClick }>
@@ -59,28 +59,32 @@ export default function NavBar () {
                             <span className = { styles.text }>Map</span>
                         </li>
                         <li
+                            className = { location.pathname === "/cards" ? styles.activeList : undefined }
                             onClick = {() => window.location.href = "/cards"}
                         >
-                            <img className = { `${styles.icon} ${styles.map}` } src ={ icons.map } />
+                            <img className = { `${styles.icon} ${styles.map}` } src ={ icons.card } />
                             <span className = { styles.text }>Edit Cards</span>
                         </li>
                         <li
+                            className = { location.pathname === "/modal" ? styles.activeList : undefined }
                             onClick = {() => window.location.href = "/modal"}
                         >
-                            <img className = { `${styles.icon} ${styles.map}` } src ={ icons.map } />
+                            <img className = { `${styles.icon} ${styles.map}` } src ={ icons.edit } />
                             <span className = { styles.text }>Edit Modal</span>
                         </li>
                         <li
+                            className = { location.pathname === "/audio" ? styles.activeList : undefined }
                             onClick = {() => window.location.href = "/audio"}
                         >
-                            <img className = { `${styles.icon} ${styles.map}` } src ={ icons.map } />
+                            <img className = { `${styles.icon} ${styles.map}` } src ={ icons.upload } />
                             <span className = { styles.text }>Edit Audio</span>
                         </li>
                         {user?.role === "admin" && (
                             <li
-                            onClick = {() => window.location.href = "/usermanage"}
+                                className = { location.pathname === "/usermanage" ? styles.activeList : undefined }
+                                onClick = {() => window.location.href = "/usermanage"}
                             >
-                                <img className = { `${styles.icon} ${styles.map}` } src ={ icons.map } />
+                                <img className = { `${styles.icon} ${styles.map}` } src ={ icons.profile } />
                                 <span className = { styles.text }>User <br />Management</span>
                             </li>
                         )}

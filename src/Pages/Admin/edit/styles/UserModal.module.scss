@@ -3,115 +3,104 @@
 @import "../../../Users/landing/signInModule/global.scss";
 @import "../../../Users/landing/signInModule/stylesVariables.scss";
 
-/* Modal Background */
-.modal {
+.modalContent {
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    background-color: $tertiary;
+    border-radius: 10px;
     display: flex;
-    justify-content: center;
-    height: 100%;
-    left: 0;
-    overflow: auto;
-    position: fixed;
-    top: 0;
+    flex-direction: column;
+    margin: 0 20px;
+    max-width: 350px;
+    padding: 20px;
     width: 100%;
-    z-index: 1000;
 
-    .modalContent {
-        align-items: center;
-        background-color: $tertiary;
-        border-radius: 10px;
+    .close { // adapts styles from global
+        position: absolute;
+
+        img {
+            height: 15px;
+            width: 15px;
+        }
+    }
+
+    .header {
+        background-color: $secondary;
+        border-radius: 0 0 50px 50px;
+        text-align: center;
+        margin: -20px 0 20px 0;
+        padding: 10px 20px;
+        width: 70%;
+
+        .txtTitle {
+            color: $tertiary;
+            font-size: 25px;
+        }
+    }
+
+    .form {
         display: flex;
-        flex-direction: column;
-        margin: 0 20px;
-        max-width: 350px;
-        padding: 20px;
-        width: 100%;
+        justify-content: center;
+        gap: 10px;
 
-        .close { // adapts styles from global
-            position: absolute;
+        .container1 {
+                
+            input {
+                border: 1.5px solid black;
+                border-radius: 5px;
+                padding: 5px;
+                outline: transparent;
+                transition: all 0.2s ease-in-out;
+                width: 100%;
 
-            img {
-                height: 15px;
-                width: 15px;
+                &:focus {
+                    border: 1.5px solid $primary;
+                }
             }
         }
 
-        .header {
-            background-color: $secondary;
-            border-radius: 0 0 50px 50px;
-            text-align: center;
-            margin: -20px 0 20px 0;
-            padding: 10px 20px;
-            width: 70%;
-
-            .txtTitle {
-                color: $tertiary;
-                font-size: 25px;
-            }
-        }
-
-        .form {
+        .container2 {
             display: flex;
-            justify-content: center;
-            gap: 10px;
+            flex-direction: column;
 
-            .container1 {
-                    
-                input {
-                    border: 1.5px solid black;
-                    border-radius: 5px;
-                    padding: 5px;
-                    outline: transparent;
-                    transition: all 0.2s ease-in-out;
-                    width: 100%;
-
-                    &:focus {
-                        border: 1.5px solid $primary;
-                    }
-                }
+            select {
+                width: 100px;
             }
 
-            .container2 {
-                display: flex;
-                flex-direction: column;
+            button {
+                align-self: end;
+                background-color: $primary;
+                border-radius: 20px;
+                color: $tertiary;
+                font-family: $title;
+                margin-top: auto;
+                padding: 5px 35px;
+                transition: all 0.2s ease-in-out;
 
-                select {
-                    width: 100px;
-                }
-
-                button {
-                    align-self: end;
-                    background-color: $primary;
-                    border-radius: 20px;
-                    color: $tertiary;
-                    font-family: $title;
-                    margin-top: auto;
-                    padding: 5px 35px;
+                &:hover {
+                    scale: 1.1;
                 }
             }
+        }
 
-            .subContainer {
-                display: flex;
-                flex-direction: column;
+        .subContainer {
+            display: flex;
+            flex-direction: column;
 
-                label {
-                    font-family: $subTitle;
-                    font-size: 13px;
-                }
+            label {
+                font-family: $subTitle;
+                font-size: 13px;
+            }
 
-                select {
-                    background-color: transparent;
-                    border: 1.5px solid black;
-                    border-radius: 5px;
-                    font-family: $subTitle;
-                    padding: 2px;
-                    width: 100%;
-                }
+            select {
+                background-color: transparent;
+                border: 1.5px solid black;
+                border-radius: 5px;
+                font-family: $subTitle;
+                padding: 2px;
+                width: 100%;
             }
         }
     }
-    
 }
 
 

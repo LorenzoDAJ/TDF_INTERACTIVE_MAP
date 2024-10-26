@@ -18,9 +18,10 @@
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    max-width: 300px;
+    max-width: 600px;
     padding: 20px;
     position: relative;
+    width: 80%;
     z-index: 1001;
 
     .closeButton {
@@ -64,11 +65,12 @@
 
       .featuredImage {
         flex-grow: 1;
+        width: 1200%;
 
         img {
           border-radius: 10px;
           height: auto;
-          width: 210px;
+          width: 100%;
         }
       }
 
@@ -76,6 +78,7 @@
         display: flex;
         flex-direction: column;
         gap: 5px;
+        width: 376%;
 
         img {
           border-radius: 10px;
@@ -86,12 +89,15 @@
     }
 
     .infoContainer {
+      align-self: center;
       background-color: black;
       border-radius: 10px 70px 0 0;
       margin-bottom: -20px;
       margin-top: auto;
+      max-width: 510px;
       padding: 10px 22px 0 22px;
       transition: all 0.2s ease-in-out;
+      width: 100%;
 
       .description, .technologies {
         height: 100%;
@@ -99,14 +105,14 @@
         .txtSubTitle {
           color: $tertiary;
           font-size: 8px;
-          margin-bottom: 5px;
+          margin-bottom: 15px;
           margin-top: 10px;
           width: 80%;
         }
       }
 
       .btns {
-        margin-top: 15px;
+        margin-top: 20px;
         display: flex;
         margin-left: -10px;
 
@@ -137,9 +143,9 @@
           background-color: $primary;
           border-radius: 50%;
           height: 35px;
-          right: 40px;
+          right: 12%;
           position: absolute;
-          top: 280px;
+          top: 80%;
           transition: all 0.2s ease-in-out;
           width: 35px;
 
@@ -165,40 +171,76 @@
   width: 60%;
 }
 
-// .imgCont{
-//   width: 100%;
-//   img{
-//     width: 100%;
-//   }
-// }
+// RESPONSIVE DESIGN
 
-// // below 666px
-// @media (min-width: 666px) {
-//   .modalContent{
-//     max-width: 50%;
-//   }
-// }
+@media (min-width: 576px) {
+  .modalBackdrop {
+    .modalContent {
+        .headerBg {
+          margin: 0 0 20px 0; 
+          .txtTitle {
+            font-size: 30px;
+            height: 40px;
+            padding: 0 10px;
+          }
+        }
 
-// .imageCarousel {
-//   margin-top: 20px; /* Space above carousel */
-//   width: 100%;
-//   max-width: 750px; /* Adjust based on your layout */
-//   margin: 0 auto;
-//   padding: 5px;
-//   border: 1px solid black;
-  
-//   .slickSlide {
-//     display: flex;
-//       justify-content: center;
-//       align-items: center;
-//   }
+        .infoContainer {
+          .description, .technologies {
+            .txtSubTitle {
+              font-size: 10px;
+            }
+          }
+          
+          .btns {
+            li {
+              span {
+                border-radius: 10px 10px 0 0;
+                font-size: 12px;
+              }
+            }
+          }
 
-//   .carouselImage {
-//     width: 100%;
-//     height: 100%; /* Ensures image fills the carousel slide */
-//     object-fit: cover; /* Ensures uniform image display while maintaining aspect ratio */
-//     border-radius: 10px;
-//     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+          .speaker {
+            height: 50px;
+            top: 82%;
+            width: 50px;
+          }
+        }
+    }
+  }
+}
 
-//   }
-// }
+@media (min-width: 768px) {
+  .modalBackdrop {
+    .modalContent {
+        .headerBg {
+          // margin: 0 0 20px 0; 
+          .txtTitle {
+            // font-size: 25px;
+          }
+        }
+
+        .infoContainer {
+          .description, .technologies {
+            .txtSubTitle {
+              font-size: 12px;
+            }
+          }
+          
+          .btns {
+            li {
+              span {
+                // border-radius: 10px 10px 0 0;
+                // font-size: 12px;
+              }
+            }
+          }
+
+          .speaker {
+            top: 85%;
+          }
+        }
+    }
+  }
+}

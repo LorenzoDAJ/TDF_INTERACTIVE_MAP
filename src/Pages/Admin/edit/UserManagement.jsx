@@ -6,6 +6,8 @@ import styles from  '/src/Pages/Admin/edit/styles/UserManagement.module.scss';  
 import UserModal from './UserModal'; // Component for handling modal input
 
 import icons from "../../../assets/for_landingPage/Icons";
+import { motion, AnimatePresence } from 'framer-motion'
+import Confirmation from '../utility/ConfirmationComponent/Confirmation';
 import NavBar from './navBar/NavBar';
 import AccessBtn from '/src/Pages/Users/landing/signInModule/AccessBtn'; // Import the new AccessBtn component
 import '/src/Pages/Users/landing/signInModule/AccessBtn.module.scss';
@@ -50,7 +52,7 @@ const UserManagement = () => {
     };
 
     const handleDeleteUser = async (id) => {
-        const confirmed = window.confirm('Are you sure you want to delete this user?');
+        // const confirmed = window.confirm('Are you sure you want to delete this user?');
         if (!confirmed) return;
         try {
             await axios.delete(`http://localhost:5000/api/users/delete/${id}`);
@@ -73,14 +75,33 @@ const UserManagement = () => {
         } else {
           navigate('/');
         }
-      };
+    };
 
+    // Get the root ID and and apply className 
+    useEffect(() => {
+        const rootDiv = document.getElementById("root");
 
+        // Add or remove className based on current page
+
+        if (location.pathname === "/usermanage") {
+        rootDiv.classList.add(styles.rootDiv);
+        } else {
+        rootDiv.classList.remove(styles.rootDiv);
+        }
+    }, [location])
+
+    // Confirmation Modal 
+    const [isDelete, setIsDelete] = useState(false);
+
+    function handleDeleteBtn() {
+        setIsDelete (!isDelete);
+    }
 
     return (
         <>
             <NavBar />
-            <div>
+
+            <div className = { styles.userManageContainer}>
                 <div className = { styles.header }>
                     <span className = { styles.txtTitle }>User Management</span>
                 </div>
@@ -126,7 +147,7 @@ const UserManagement = () => {
                                             <button className = {styles.editBtn} onClick={() => openModal(user)}>
                                                 <img className = { `${ styles.icon } ${ styles.pencil}` } src = { icons.pencil } alt = "Edit Item" />
                                             </button>
-                                            <button className = {styles.delBtn} onClick={() => handleDeleteUser(user._id)}>
+                                            <button className = {styles.delBtn} onClick = {setIsDelete}>
                                                 <img className = { `${ styles.icon } ${ styles.delete}` } src = { icons.remove } alt = "Delete Item" />
                                             </button>
                                         </div>
@@ -136,12 +157,49 @@ const UserManagement = () => {
                         </tbody>
                     </table>
                 </div>
-                    {modalOpen && <UserModal user={currentUser} onSave={handleAddOrUpdateUser} onClose={() => setModalOpen(false)} />}
-                        {/* Button container for absolute positioning */}
+                
+                {/* onClick={() => handleDeleteUser(user._id)} */}
+
+
+                {/* Button container for absolute positioning */}
                 {/* <div className={styles.accessBtnContainer}>
                     <AccessBtn userProp={user} /> {/* Pass user as prop if needed
                 </div> */}
             </div>
+
+
+            {/* Add and edit user modal */}
+            <AnimatePresence>
+            {modalOpen && 
+                <motion.div 
+                    className = { styles.modal }
+                    initial = {{opacity: 0}}
+                    animate = {{opacity: 1}}
+                    exit = {{opacity: 0}}
+                    transition = {{duration: 0.2, ease: "easeInOut"}}
+                >
+                    <UserModal user={currentUser} onSave={handleAddOrUpdateUser} onClose={() => setModalOpen(false)} />
+                </motion.div>
+            }
+            </AnimatePresence>
+            
+            {/* Confirmation Modal */}
+            <AnimatePresence>
+                {isDelete && (
+                    <motion.div 
+                        className = { styles.confirmation }
+                        initial = {{opacity: 0}}
+                        animate = {{opacity: 1}}
+                        exit = {{opacity: 0}}
+                        transition = {{duration: 0.2, ease: "easeInOut"}}
+                    >
+                        <Confirmation 
+                            onCancel = {() => handleDeleteBtn()}
+                            onDelete = {() => handleDeleteUser(user._id)}    
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>    
         </>
     );
     

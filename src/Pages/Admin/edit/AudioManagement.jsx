@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import AudioUpload from './AudioUpload';
 
 import icons from "../../../assets/for_landingPage/Icons";
+import { motion, AnimatePresence } from 'framer-motion'
 import NavBar from './navBar/NavBar';
 import Confirmation from '../utility/ConfirmationComponent/Confirmation';
 import AccessBtn from '/src/Pages/Users/landing/signInModule/AccessBtn'; // Import the new AccessBtn component
@@ -122,9 +123,30 @@ const AudioManagement = () => {
     }
   };
 
+   // Get the root ID and and apply className 
+   useEffect(() => {
+    const rootDiv = document.getElementById("root");
+
+    // Add or remove className based on current page
+
+    if (location.pathname === "/audio") {
+      rootDiv.classList.add(styles.rootDiv);
+    } else {
+      rootDiv.classList.remove(styles.rootDiv);
+    }
+  }, [location])
+
+  // Confirmation Modal
+  const [isDelete, setIsDelete] = useState(false);
+
+  function handleDeleteBtn() {
+      setIsDelete (!isDelete);
+  }
+
   return (
     <>
       <NavBar />
+      
       <div className={styles.audioManagementContainer}>
 
         <div className={styles.header}>
@@ -156,10 +178,10 @@ const AudioManagement = () => {
                   <td>{audio.originalName}</td>
                   <td>
                     <div className = { styles.actionBtns }>
-                      <button onClick={() => handleUpdate(audio._id)}>
-                        <img className = { `${ styles.icon } ${ styles.pencil}` } src = { icons.pencil } alt = "Edit Item" />
+                      <button>
+                        <img onClick = { handleOpenModal } className = { `${ styles.icon } ${ styles.pencil}` } src = { icons.pencil } alt = "Edit Item" />
                       </button>
-                      <button onClick={() => handleDelete(audio._id)}>
+                      <button onClick={ handleDeleteBtn }>
                         <img className = { `${ styles.icon } ${ styles.delete}` } src = { icons.remove } alt = "Delete Item" />
                       </button>
                     </div>
@@ -170,26 +192,45 @@ const AudioManagement = () => {
           </table>
         </div>
 
-        {/* Modal for AudioUpload */}
-        {showUploadModal && (
-          <div className={styles.modal}>
-          <div className={styles.modalContent}>
-            <span className={styles.closeButton} onClick={handleCloseModal}>
-                &times;
-              </span>
-              <AudioUpload onClose={handleCloseModal} />
-            </div>
-          </div>
-        )}
-          {/* Button container for absolute positioning */}
-          {/* <div className={styles.accessBtnContainer}>
-            <AccessBtn user={user} /> {/* Pass user as prop if needed
-          </div> */}
-
         {/* Audio player */}
         <audio ref={audioRef} hidden />
       </div>
-      {/* <Confirmation /> */}
+
+      {/* Modal for AudioUpload */}
+      {showUploadModal && (
+          <motion.div 
+            className={styles.modal}
+            initial = {{opacity: 0}}
+            animate = {{opacity: 1}}
+            exit = {{opacity: 0}}
+            transition = {{duration: 0.2, ease: "easeInOut"}}
+          >
+            <div className={styles.modalContent}>
+              <AudioUpload 
+                onClose={handleCloseModal} 
+                onSave = { handleUpdate }
+              />
+            </div>
+          </motion.div>
+        )}
+      
+      {/* Confirmation Modal */}
+      <AnimatePresence>
+          {isDelete && (
+            <motion.div 
+                className = { styles.confirmation }
+                initial = {{opacity: 0}}
+                animate = {{opacity: 1}}
+                exit = {{opacity: 0}}
+                transition = {{duration: 0.2, ease: "easeInOut"}}
+            >
+                <Confirmation 
+                    onCancel = {() => handleDeleteBtn()}
+                    onDelete = {() => handleDelete(audio._id)}    
+                />
+            </motion.div>
+          )}
+        </AnimatePresence>  
     </>
   );
   

@@ -30,6 +30,11 @@ import location from '/for_landingPage/icons/location.png'
 import remove from '/for_landingPage/icons/delete.png'
 import pencil from '/for_landingPage/icons/pencil.png'
 
+import card from '/for_landingPage/icons/card.png'
+import edit from '/for_landingPage/icons/edit.png'
+import profile from '/for_landingPage/icons/profile.png'
+import upload from '/for_landingPage/icons/upload.png'
+
 export default { 
         arrow, // globas
         mapIcon, hamburger, close, user, // navBar assets
@@ -37,5 +42,6 @@ export default {
         contact, info, feedback, calendar, map, // navList assets 
         star, // submit feedback assets
         audio, location,
-        remove, pencil
+        remove, pencil,
+        card, edit, profile, upload
     }; 

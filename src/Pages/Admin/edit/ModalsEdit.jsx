@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import ArrowIcon from '../../../assets/actions/Arrow_icon.png';
 import styles from '/src/Pages/Admin/edit/styles/ModalsEdit.module.scss'; // Ensure you have proper CSS
 
+import { motion, AnimatePresence } from 'framer-motion'
+import images from '../../../assets/for_landingPage/Images';
 import NavBar from './navBar/NavBar';
 import AccessBtn from '/src/Pages/Users/landing/signInModule/AccessBtn'; // Import the new AccessBtn component
 import '/src/Pages/Users/landing/signInModule/AccessBtn.module.scss';
@@ -158,34 +160,167 @@ const handleModalFileChange = (e) => {
     slidesToScroll: 1,
   };
 
+
+  // Get the root ID and and apply className 
+  useEffect(() => {
+    const rootDiv = document.getElementById("root");
+
+    // Add or remove className based on current page
+
+    if (location.pathname === "/modal") {
+      rootDiv.classList.add(styles.rootDiv);
+    } else {
+      rootDiv.classList.remove(styles.rootDiv);
+    }
+  }, [location])
+
+  // resize textarea based on content
+    const descriptionRef = useRef(null);
+    const technologiesRef = useRef(null);
+  
+    const adjustHeight = (ref) => {
+      if (ref && ref.current) {
+        ref.current.style.height = 'auto'; // Reset height
+        ref.current.style.height = `${ref.current.scrollHeight}px`; // Set height to scroll height
+      }
+    };
+
+    // switch description or technologies
+    const [isInfo, setIsInfo] = useState(false);
+
+    const handleInfoBtn = () => {
+      setIsInfo(!isInfo);
+    }
+
+    //for description
+    useEffect(() => {
+      if (!isInfo) {
+        adjustHeight(descriptionRef);
+      }
+      
+    }, [isInfo, description]);
+
+    //for technologies
+    useEffect(() => {
+      if (isInfo) {
+        adjustHeight(technologiesRef);
+      }
+    }, [isInfo, description]);
+
   return (
   <>
     <NavBar />  
   
-    <div className={styles.modalContainer}>
-      <div className={styles.Header}>
-      <h1>All Modals</h1>
-      <button className={styles.backButton} onClick={handleBackClick}>
-              <img src={ArrowIcon} alt="Back" className={styles.icon} />
-              </button>
+    <div className = { styles.modalContainer }>
+      <div className = { styles.header }>
+        <span className = { styles.txtTitle }>EDIT MODAL</span>
       </div>
+
+      <span className = { `${ styles.txtTitle} ${ styles.listHeader }` }>Select Modal</span>
       <div className={styles.modalsList}>
         {modals.map((modal) => (
-          <div key={modal._id}>
-            <h3>{modal.title}</h3>
+          <div className = { styles.infoContainer } key={modal._id}>
+            <span className = { styles.txtTitle }>{modal.title}</span>
             <button onClick={() => handleEditClick(modal)}>Edit</button>
           </div>
         ))}
-    </div>
+      </div>
 
     {currentModal && (
-      <div className={styles.modalOverlay}>
-        <div className={styles.modalEditingSection}>
-          <label>
-            Edit Modal:
-            <h2>{currentModal.title}</h2>
+      <div className={styles.modalEditingSection}>
+        <div className={styles.modal}>
+          <label className = { styles.headerBg }>
+            <span className = { styles.txtTitle }>{currentModal.title}</span>
           </label>
-          <form onSubmit={handleSubmit}>
+
+          {/* image container */}
+          <div className = { styles.imageContainer }>
+            <div className = { styles.featuredImage }>
+              <img src={images.image1}/>
+            </div>
+            <div className = { styles.sideImages}>
+              <img src={images.image2}/>
+              <img src={images.image2}/>
+              <img src={images.image2}/>
+            </div>
+          </div>
+
+          {/* Description and technologies */}
+          <div className = { isInfo ? `${ styles.infoContainer } ${ styles.active }` : styles.infoContainer }>
+            <AnimatePresence mode="wait">
+              {!isInfo && (
+                <motion.div 
+                  className = { styles.description }
+                  key = {"description"}
+                  initial = {{opacity: 0}}
+                  animate = {{opacity: 1, transition: {delay: 0.2}}}
+                  exit = {{opacity: 0}}
+                  transition = {{duration: 0.2,  ease: "easeInOut"}}
+                  onAnimationComplete={() => adjustHeight(descriptionRef)}
+                >
+                  <textarea 
+                    ref = {descriptionRef}
+                    row = "1"
+                    className = { styles.txtSubTitle } 
+                    value = {description}
+                    onInput={() => adjustHeight(descriptionRef)}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required  
+                  />
+                  
+                  <div className = { styles.line }></div>
+                </motion.div>
+              )}
+
+              {isInfo && (
+                <motion.div 
+                  className = { styles.technologies }
+                  key = {"technologies"}
+                  initial = {{opacity: 0}}
+                  animate = {{opacity: 1, transition: {delay: 0.2}}}
+                  exit = {{opacity: 0}}
+                  transition = {{duration: 0.2, ease: "easeInOut"}}
+                  onAnimationComplete={() => adjustHeight(technologiesRef)}
+                >
+                  <textarea 
+                    ref = {technologiesRef}
+                    row = "1"
+                    className ={ styles.txtSubTitle }
+                    value = {description}
+                    onInput={() => adjustHeight(technologiesRef)}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required 
+                  />
+
+                  <div className = { styles.line }></div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+            
+
+            <div className = { styles.infoBtn }>
+              <ul className = { styles.btns }>
+                <li>
+                  <span 
+                    className = { styles.descBtn }
+                    onClick = { isInfo ? handleInfoBtn : undefined }
+                  >
+                    DESCRIPTION
+                  </span>
+                </li>
+                <li>
+                  <span 
+                    className = { styles.techBtn }
+                    onClick = { !isInfo ? handleInfoBtn : undefined }
+                  >
+                      TECHNOLOGIES
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* <form onSubmit={handleSubmit}>
             <label>
               Description:
               <textarea
@@ -222,17 +357,114 @@ const handleModalFileChange = (e) => {
             )}
 
                 <button className={styles.saveBtn} type="submit">Save</button>
-                {/* Add a Close button to close the modal */}
+                {/* Add a Close button to close the modal *
                 <button className={styles.closeBtn} type="button" onClick={closeModal}>Close</button>
-              </form>
+              </form> */}
             </div>
           </div>
         )}
-        {/* Button container for absolute positioning */}
-        {/* <div className={styles.accessBtnContainer}>
-            <AccessBtn user={user} /> {/* Pass user as prop if needed
-        </div> */}
       </div>
+
+      {/* <div className={styles.modalBackdrop}>
+      <div className={styles.modalContent}>
+        <button className={styles.closeButton} onClick={handleClose}>
+          <img src={icons.close} alt="close" />
+        </button>
+
+        <div className = { styles.headerBg }>
+          <span className = { styles.txtTitle }>{modalData.title}</span>
+        </div>
+
+        <div className = { styles.imageContainer }>
+          <div className = { styles.featuredImage }>
+            <img src={images.image1}/>
+          </div>
+          <div className = { styles.sideImages}>
+            <img src={images.image2}/>
+            <img src={images.image2}/>
+            <img src={images.image2}/>
+          </div>
+        </div>
+      
+        <div className = { isInfo ? `${ styles.infoContainer } ${ styles.active }` : styles.infoContainer }>
+          <AnimatePresence mode="wait">
+            {!isInfo && (
+              <motion.div 
+                className = { styles.description }
+                key = {"description"}
+                initial = {{opacity: 0}}
+                animate = {{opacity: 1, transition: {delay: 0.2}}}
+                exit = {{opacity: 0}}
+                transition = {{duration: 0.2,  ease: "easeInOut"}}
+              >
+                <p className = { styles.txtSubTitle }>{modalData.description}</p>
+                
+                <div className = { styles.line }></div>
+              </motion.div>
+            )}
+            
+            {isInfo && (
+              <motion.div 
+                className = { styles.technologies }
+                key = {"technologies"}
+                initial = {{opacity: 0}}
+                animate = {{opacity: 1, transition: {delay: 0.2}}}
+                exit = {{opacity: 0}}
+                transition = {{duration: 0.2, ease: "easeInOut"}}
+              >
+                <p className ={ styles.txtSubTitle }>
+                  {/* placeholder 
+                  1. Somebullshit Somebullshit Somebullshit <br />
+                  2. Somebullshit Somebullshit Somebullshit <br />
+                  3. Somebullshit Somebullshit Somebullshit <br />
+                  4. Somebullshit Somebullshit Somebullshit <br />
+                </p>  
+
+                <div className = { styles.line }></div>
+              </motion.div>
+            )}
+            
+          </AnimatePresence>
+        
+          <div className = { styles.infoBtn }>
+              <ul className = { styles.btns }>
+                <li>
+                  <span 
+                    className = { styles.descBtn }
+                    onClick = { isInfo ? handleInfoBtn : undefined }
+                  >
+                    DESCRIPTION
+                  </span>
+                </li>
+                <li>
+                  <span 
+                    className = { styles.techBtn }
+                    onClick = { !isInfo ? handleInfoBtn : undefined }
+                  >
+                      TECHNOLOGIES
+                  </span>
+                </li>
+              </ul>
+
+              <AnimatePresence mode="wait">
+                {!isInfo && (
+                  <motion.button 
+                    className = { styles.speaker } 
+                    onClick={() => onClickAudio(modalData.modal_id)} 
+                    disabled={isPlaying}
+                    initial = {{opacity: 0}}
+                    animate = {{opacity: 1, transition: {delay: 0.4}}}
+                    exit = {{opacity: 0}}
+                    transition = {{duration: 0.2, ease: "easeInOut"}}
+                  >
+                    <img class= { styles.icon } src={icon.actions.speaker} alt="speaker" />
+                    {isPlaying && <span> Playing...</span>} {/* Optional message
+                  </motion.button>
+                )} 
+              </AnimatePresence>
+              
+          </div>
+        </div> */}
   </>
   );
 };

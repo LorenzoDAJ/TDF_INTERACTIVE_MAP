@@ -1,205 +1,187 @@
 @import "../../../Users/landing/signInModule/global.scss";
 @import "../../../Users/landing/signInModule/stylesVariables.scss";
 
+.userManageContainer {
+    height: 100%;
+    overflow-x: hidden;
+    width: 100%;
 
-.header { 
-    align-items: center;
-    background-color: $secondary;
-    border-radius: 0 0 90px 0;
-    display: flex;
-    height: 100px;
-    justify-content: center;
-    width: 86%;
+    .header { 
+        align-items: center;
+        background-color: $secondary;
+        border-radius: 0 0 90px 0;
+        display: flex;
+        height: 100px;
+        justify-content: center;
+        width: 86%;
 
-    .txtTitle {
-      color: $tertiary;
-      font-size: 21px;
-    }
-}
-
-.tblWrapper {
-    display: flex;
-    flex-direction: column;
-    margin: 40px 15px 0 15px;
-
-    button {
-        transition: all 0.2s ease-in-out;
-  
-        &:hover {
-          scale: 1.2;
+        .txtTitle {
+        color: $tertiary;
+        font-size: 21px;
         }
     }
 
-    .btn {
-        align-self: flex-end;
-        margin-bottom: 10px;
+    .tblWrapper {
+        display: flex;
+        flex-direction: column;
+        margin: 40px 15px 0 15px;
+
+        button {
+            transition: all 0.2s ease-in-out;
     
-        .addBtn {
-            background-color: $primary;
-            border-radius: 20px;
-            box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.23);
-            color: $tertiary;
-            font-family: $title;
-            padding: 5px 20px;
-        }
-    }
-
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-        table-layout: fixed;
-
-        th, td {
-            border-bottom: 1.5px solid $outOfFocus;
-            font-family: $subTitle;
-            font-size: 11px;
-            padding: 12px 5px;
-            text-align: center;
+            &:hover {
+            scale: 1.2;
+            }
         }
 
-        .nameColumn { 
-            display: flex;
-            gap: 10px;
-            justify-content: center;
+        .btn {
+            align-self: flex-end;
+            margin-bottom: 10px;
+        
+            .addBtn {
+                background-color: $primary;
+                border-radius: 20px;
+                box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.23);
+                color: $tertiary;
+                font-family: $title;
+                padding: 5px 20px;
+            }
+        }
 
-            // remove userIcon for now
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
 
-            // .userIcon {
-            //     background-color: $primary;
-            //     border-radius: 50px;
-            //     height: 30px;
-            //     width: 30px;
-            // }
-    
-            .userInfo {
+            th, td {
+                border-bottom: 1.5px solid $outOfFocus;
+                font-family: $subTitle;
+                font-size: 11px;
+                padding: 12px 5px;
+                text-align: center;
+            }
+
+            .nameColumn { 
                 display: flex;
-                flex-direction: column;
-                text-align: left;
-                width: 80px;
-            }
-        }
+                gap: 10px;
+                justify-content: center;
 
-        .email {
-            color: $outOfFocus;
-            font-size: 7.5px;
-        }
+                // remove userIcon for now
 
-        .role {
-            border-radius: 10px;
-            color: $tertiary;
-            cursor: default;
-            font-family: $title;
-            font-size: 7px;
-            padding: 5px 13px;
-            text-transform: uppercase;
-
-            &.admin {
-                background-color: $danger;
+                // .userIcon {
+                //     background-color: $primary;
+                //     border-radius: 50px;
+                //     height: 30px;
+                //     width: 30px;
+                // }
+        
+                .userInfo {
+                    display: flex;
+                    flex-direction: column;
+                    text-align: left;
+                    width: 80px;
+                }
             }
 
-            &.staff {
-                background-color: $guest;
+            .email {
+                color: darkgray;
+                font-size: 7.5px;
             }
-        }
 
-        .actionBtns {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-          }
+            .role {
+                border-radius: 10px;
+                color: $tertiary;
+                cursor: default;
+                font-family: $title;
+                font-size: 7px;
+                padding: 5px 13px;
+                text-transform: uppercase;
 
-        .icon {
-            height: 15px;
-            width: 15px;
+                &.admin {
+                    background-color: $danger;
+                }
+
+                &.staff {
+                    background-color: $guest;
+                }
+            }
+
+            .actionBtns {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .icon {
+                height: 15px;
+                width: 15px;
+            }
         }
     }
 }
 
-// .container {
-//     padding: 40px;
-//     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-//     background-color: #f9f9f9;
-//     border-radius: 10px;
-//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-// }
-
-// .header {
-//     text-align: center;
-//     color: #333;
-//     margin-bottom: 30px;
-//     font-size: 24px;
-// }
-
-// .btn{
-//     margin-bottom: 20px;
-//     padding: 10px 20px;
-//     background-color: #28a745;
-//     color: white;
-//     border: none;
-//     border-radius: 5px;
-//     cursor: pointer;
-//     transition: background-color 0.3s;
-
-//     &:hover {
-//         background-color: #218838;
-//     }
-// }
-
-// .table{
-//     width: 100%;
-//     border-collapse: collapse;
-//     margin-bottom: 20px;
-//     overflow-x: auto; 
+.confirmation, .modal {
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    z-index: 5;
+}
 
 
-//         th, td {
-//             border: 1px solid #ddd;
-//             padding: 12px;
-//             text-align: center;
-//             font-size: 16px;
-//             word-wrap: break-word;
-//             white-space: normal;
-//         }
+// RESPONSIVE DESIGN
 
-//         th {
-//             background-color: #007bff;
-//             color: white;
-//         }
+@media (min-width: 992px) {
+    .userManageContainer {
+        .header {
+            border-radius: 0 0 150px 0;
+            padding: 80px 0;
 
-//         td {
-//             background-color: #fff;
-//         }
-// }
+            .txtTitle {
+                font-size: 40px;
+            }
+        }
 
+        .tblWrapper {
+            .btn {
+                .addBtn {
+                    border-radius: 40px;
+                    font-size: 23px; 
+                    padding: 5px 30px;
+                }
+            } 
 
+            .table {
+                th, td {
+                    font-size: 15px;
+                }
 
-// .editBtn { 
-//     padding: 7px 15px;
-//     border-radius: 5px;
-//     border: none;
-//     cursor: pointer;
-//     transition: background-color 0.3s;
-//     background-color: #17a2b8;
-//     color: white;
-//     margin-right: 5px;
+                .nameColumn {
+                    .userInfo {
+                        width: 90px;
+                    }
+                }
 
-//     &:hover {
-//         background-color: #138496;
-//     }
-// }
+                .email {
+                    font-size: 10px;
+                }
 
-// .delBtn { 
-//     padding: 7px 15px;
-//     border-radius: 5px;
-//     border: none;
-//     cursor: pointer;
-//     transition: background-color 0.3s;
-//     background-color: #dc3545;
-//     color: white;
-    
-//     &:hover {
-//         background-color: #c82333;
-//     }
-// }
+                .role {
+                    border-radius: 30px;
+                    font-size: 13px;
+                    padding: 5px 18px;
+                }
+
+                .icon {
+                    height: 23px;
+                    width: 23px;
+                }
+            }
+        }   
+    }
+}
 
 

@@ -6,10 +6,10 @@
     border-radius: 20px;
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
     height: 430px;
-    margin: 25px 20px;
+    margin: 25px 25px 25px 0;
     padding: 20px 25px;
     position: relative;
-    width: 300px;
+    max-width: 300px;
 
     -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
     -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
@@ -49,7 +49,7 @@
         .btns {
             display: flex;
             flex-direction: column;
-            margin: 10px 0;
+            margin: 10px 5px 10px 0;
             position: absolute;
             right: -1.7rem;
 
@@ -63,6 +63,11 @@
 
                 -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.23);
                 -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.23);
+
+                .icon {
+                    height: 32px;
+                    width: 32px;
+                }
 
                 &:hover {
                     scale: 1.1;

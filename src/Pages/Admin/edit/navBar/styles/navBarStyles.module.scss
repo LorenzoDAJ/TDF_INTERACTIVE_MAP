@@ -10,7 +10,7 @@
     height: 100%;
     position: fixed;
     width: 180px;
-    z-index: 1;
+    z-index: 3;
 
     .menu {
         background-color: $primary;
@@ -98,7 +98,7 @@
             transition: all 0.2s ease-in-out;
         }
 
-        &:hover{
+        &:hover, &.activeList{
             background-color: $guest;
 
             .icon {
@@ -165,3 +165,68 @@
     width: 80%;
 }
 
+
+
+//RESPONSIVE DESIGN
+
+@media (min-width: 768px) {
+    .navBar {
+        position: relative;
+        width: 30%;
+
+        .menu {
+            display: none;
+        }
+    }    
+}
+
+@media (min-width: 1200px) {
+    .navBar {
+        .greeting {
+
+            .txtTitle {
+                font-size: 30px;
+            }
+
+            .iconContainer {
+                height: 70px;
+                width: 70px;
+
+                .icon.user {
+                    height: 40px;
+                    width: 40px;
+                }
+            }
+        }
+    }
+
+    .navList { 
+        li {
+            .icon {
+                height: 30px;
+                width: 30px;
+            }
+
+            span {
+                font-size: 20px;
+            }
+        }
+    }
+
+    .footer {
+        .logout {
+            .icon.logout {
+                height: 30px;
+                width: 30px;
+            }
+
+            span {
+                font-size: 20px;
+            }
+        }
+    }
+
+    .line {
+        border-bottom: 2.5px solid $outOfFocus;
+    }
+}
