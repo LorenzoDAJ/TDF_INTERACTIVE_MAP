@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './styles/CardsEdit.module.scss';
 import ArrowIcon from '../../../assets/actions/Arrow_icon.png';
 //import { useParams } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+import { motion, AnimatePresence } from 'framer-motion'
 import NavBar from './navBar/NavBar';
+import images from '../../../assets/for_landingPage/Images';
 import AccessBtn from '/src/Pages/Users/landing/signInModule/AccessBtn'; // Import the new AccessBtn component
 import '/src/Pages/Users/landing/signInModule/AccessBtn.module.scss';
 
@@ -17,6 +19,7 @@ const Cards = () => {
   //const { id } = useParams(); // Get the card ID from the route
   const [cards, setCards] = useState([]);  // Stores the current card data
   const [originalCards, setOriginalCards] = useState([]); // Stores the original data
+  const [selectedCardId, setSelectedCardId] = useState(null);
 
   const placeholderImage = "https://via.placeholder.com/150"; // URL for a placeholder image
   
@@ -136,6 +139,16 @@ const handleSubmit = async (e) => {
   }, [location])
 
 
+  // resize textarea based on content
+  const textareaRef = useRef(null);
+
+  const adjustHeight = (ref) => {
+    if (ref) {
+      ref.current.style.height = 'auto'; // Reset height
+      ref.current.style.height = `${ref.current.scrollHeight}px`; // Set height to scroll height
+    }
+  };
+
   return (
     <>
       <NavBar />
@@ -160,54 +173,48 @@ const handleSubmit = async (e) => {
         {cards.map((card) => (
           <div className = { styles.infoContainer } key={card._id}>
             <span className = { styles.txtTitle }>{card.areaName}</span>
-            <button onClick={() => handleEditClick(card)}>Edit</button>
+            <button onClick={() => setSelectedCardId(card._id)}>Edit</button>
           </div>
         ))}
         </div>
 
-        {/* <form onSubmit={handleSubmit}>
+        <AnimatePresence>
           {cards.map(card => (
-            <div key={card._id} className={styles.card}>
-              <h3>{card.areaName}</h3> */}
+            card._id === selectedCardId && (
+              <motion.div 
+                className = { styles.cardEditingSection }
+                initial = {{opacity: 0}}
+                animate = {{opacity: 1}}
+                exit = {{opacity: 0}}
+                transition = {{duration: 0.2, ease: "easeInOut"}}
+                onAnimationComplete = {() => adjustHeight(textareaRef)}
+              >
+                <div className = { styles.card }>
+                  <div className={styles.popupImage}>
+                    <img src={ images.image1 } alt={ card.areaName }/> {/* tempoorary replace the marker.img for visualization */}
+                  </div>
 
-              {/* <div className={styles.imageUpload}>
-                <label htmlFor={`image-upload-${card._id}`}>Upload Image</label>
-                <input
-                  type="file"
-                  accept="image/"
-                  id={`image-upload-${card._id}`}
-                  onChange={(e) => handleImageUpload(e, card._id)}
-                />
-                {card.image && <img src={`http://localhost:5000${card.image || placeholderImage}`} alt="Uploaded preview" />}
-              </div>
+                  <div className={styles.cont1}>
 
-              <div className={styles.quickFacts}>
-                <label htmlFor={`quick-facts-${card._id}`}>Quick Facts:</label>
-                <textarea
-                  id={`quick-facts-${card._id}`}
-                  value={card.quickFacts}
-                  onChange={(e) => handleQuickFactsChange(e, card._id)}
-                />
-              </div> */}
-            </div>
-          {/* ))} */}
-          {/* Relocate this button */}
-          {/* <button className={styles.submitBtn} type="submit">Save Changes</button> */}
-          {/* <div className={styles.navigationButton}>
-          </div> */}
-        {/* </form> */}
-        {/* Button container for absolute positioning */}
-        
-        {/* <div className={styles.accessBtnContainer}>
-            <AccessBtn user={user} /> {/* Pass user as prop if needed 
-        </div> */}
+                    <span className = {styles.txtTitle} >{card.areaName}</span>
 
-      {/* </div> */}
+                    <div className = { styles.line }></div>
+
+                    <textarea 
+                      ref = {textareaRef}
+                      className = { styles.quickFacts } 
+                      value = { card.quickFacts }
+                      onInput = {() => adjustHeight(textareaRef)}
+                    />
+
+                  </div>  
+                </div>
+              </motion.div>
+            )
+          ))}
+        </AnimatePresence>
+      </div>
     </>
-
-
-    
-    
   );
 };
 

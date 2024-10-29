@@ -63,7 +63,72 @@
       }
     }
   }
-  
+
+  .cardEditingSection {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+
+    .card {
+      align-items: center;
+      background-color: $tertiary;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      height: 430px;
+      max-width: 300px;
+      padding: 20px 25px;
+      width: 80%;
+      
+
+      .popupImage {
+        margin: -20px -25px 0 -25px; 
+        position: relative;
+        width: calc(100% + 50px);
+        img{
+            border-radius: 20px 20px 0 0;
+            width: 100%;
+        }
+      }
+
+      .cont1 {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin: 15px 0;
+
+        .txtTitle {
+          font-size: 30px;
+          line-height: 1;
+          margin-bottom: 5px;
+          text-align: center;
+        }
+
+        .quickFacts { //textarea
+          border: 1px solid black;
+          border-radius: 5px;
+          font-family: $subTitle;
+          font-size: 13px;
+          justify-self: center;
+          margin-top: 10px;
+          max-height: 100px;
+          max-width: 210px;
+          padding: 5px;
+          resize: none;
+          outline: transparent;
+          overflow: hidden;
+          width: 90%;
+        }
+      }
+    }
+  } 
+}
+
+.line { //line separator
+  border-bottom: 2px solid $outOfFocus;
+  width: 93%;
 }
 
 

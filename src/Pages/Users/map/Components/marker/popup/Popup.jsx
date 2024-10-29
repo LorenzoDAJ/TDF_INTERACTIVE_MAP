@@ -102,12 +102,6 @@ function Popup({ modalId ,marker, onClose, isAdmin=true }) {
               <button className={styles.deets} onClick={onViewFullDetail}>
                 <p>View Full Details &nbsp; {'>'}</p>
               </button>
-              {/*  <button
-              className={styles.deets}
-              onClick={()=> onViewFullDetail(marker)}>
-                  <p>View Full Details {'>'}</p>
-              </button> */
-              } 
             </div>
           </div>
 

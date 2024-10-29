@@ -225,145 +225,112 @@ const handleModalFileChange = (e) => {
           </div>
         ))}
       </div>
+      
+      <AnimatePresence mode="wait">
+        {currentModal && (
+          <motion.div 
+            className={styles.modalEditingSection}
+            initial = {{opacity: 0}}
+            animate = {{opacity: 1}}
+            exit = {{opacity: 0}}
+            transition = {{duration: 0.2, ease: "easeInOut"}}
+          >
+            <div className={styles.modal}>
+              <label className = { styles.headerBg }>
+                <span className = { styles.txtTitle }>{currentModal.title}</span>
+              </label>
 
-    {currentModal && (
-      <div className={styles.modalEditingSection}>
-        <div className={styles.modal}>
-          <label className = { styles.headerBg }>
-            <span className = { styles.txtTitle }>{currentModal.title}</span>
-          </label>
-
-          {/* image container */}
-          <div className = { styles.imageContainer }>
-            <div className = { styles.featuredImage }>
-              <img src={images.image1}/>
-            </div>
-            <div className = { styles.sideImages}>
-              <img src={images.image2}/>
-              <img src={images.image2}/>
-              <img src={images.image2}/>
-            </div>
-          </div>
-
-          {/* Description and technologies */}
-          <div className = { isInfo ? `${ styles.infoContainer } ${ styles.active }` : styles.infoContainer }>
-            <AnimatePresence mode="wait">
-              {!isInfo && (
-                <motion.div 
-                  className = { styles.description }
-                  key = {"description"}
-                  initial = {{opacity: 0}}
-                  animate = {{opacity: 1, transition: {delay: 0.2}}}
-                  exit = {{opacity: 0}}
-                  transition = {{duration: 0.2,  ease: "easeInOut"}}
-                  onAnimationComplete={() => adjustHeight(descriptionRef)}
-                >
-                  <textarea 
-                    ref = {descriptionRef}
-                    row = "1"
-                    className = { styles.txtSubTitle } 
-                    value = {description}
-                    onInput={() => adjustHeight(descriptionRef)}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required  
-                  />
-                  
-                  <div className = { styles.line }></div>
-                </motion.div>
-              )}
-
-              {isInfo && (
-                <motion.div 
-                  className = { styles.technologies }
-                  key = {"technologies"}
-                  initial = {{opacity: 0}}
-                  animate = {{opacity: 1, transition: {delay: 0.2}}}
-                  exit = {{opacity: 0}}
-                  transition = {{duration: 0.2, ease: "easeInOut"}}
-                  onAnimationComplete={() => adjustHeight(technologiesRef)}
-                >
-                  <textarea 
-                    ref = {technologiesRef}
-                    row = "1"
-                    className ={ styles.txtSubTitle }
-                    value = {description}
-                    onInput={() => adjustHeight(technologiesRef)}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required 
-                  />
-
-                  <div className = { styles.line }></div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-            
-
-            <div className = { styles.infoBtn }>
-              <ul className = { styles.btns }>
-                <li>
-                  <span 
-                    className = { styles.descBtn }
-                    onClick = { isInfo ? handleInfoBtn : undefined }
-                  >
-                    DESCRIPTION
-                  </span>
-                </li>
-                <li>
-                  <span 
-                    className = { styles.techBtn }
-                    onClick = { !isInfo ? handleInfoBtn : undefined }
-                  >
-                      TECHNOLOGIES
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* <form onSubmit={handleSubmit}>
-            <label>
-              Description:
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                required
-              />
-            </label>
-
-            <div className={styles.imageUploadContainer}>
-              <h3>Upload Images:</h3>
-              <input
-                type="file"
-                accept="image/jpeg, image/jpg, image/png"
-                multiple
-                onChange={handleModalFileChange}
-              />
-            </div>
-
-            {modalImagePreviews.length > 0 && (
-              <div className={styles.imageCarousel}>
-                <Slider {...settings}>
-                  {modalImagePreviews.map((image, index) => (
-                    <div key={index} className="slick-slide">
-                      <img
-                        src={image}
-                        alt={`Uploaded preview ${index}`}
-                        className={styles.carouselImage}
-                      />
-                    </div>
-                  ))}
-                </Slider>
+              {/* image container */}
+              <div className = { styles.imageContainer }>
+                <div className = { styles.featuredImage }>
+                  <img src={images.image1}/>
+                </div>
+                <div className = { styles.sideImages}>
+                  <img src={images.image2}/>
+                  <img src={images.image2}/>
+                  <img src={images.image2}/>
+                </div>
               </div>
-            )}
 
-                <button className={styles.saveBtn} type="submit">Save</button>
-                {/* Add a Close button to close the modal *
-                <button className={styles.closeBtn} type="button" onClick={closeModal}>Close</button>
-              </form> */}
+              {/* Description and technologies */}
+              <div className = { isInfo ? `${ styles.infoContainer } ${ styles.active }` : styles.infoContainer }>
+                <AnimatePresence mode="wait">
+                  {!isInfo && (
+                    <motion.div 
+                      className = { styles.description }
+                      key = {"description"}
+                      initial = {{opacity: 0}}
+                      animate = {{opacity: 1, transition: {delay: 0.2}}}
+                      exit = {{opacity: 0}}
+                      transition = {{duration: 0.2,  ease: "easeInOut"}}
+                      onAnimationComplete={() => adjustHeight(descriptionRef)}
+                    >
+                      <textarea 
+                        ref = {descriptionRef}
+                        row = "1"
+                        className = { styles.txtSubTitle } 
+                        value = {description}
+                        onInput={() => adjustHeight(descriptionRef)}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required  
+                      />
+                      
+                      <div className = { styles.line }></div>
+                    </motion.div>
+                  )}
+
+                  {isInfo && (
+                    <motion.div 
+                      className = { styles.technologies }
+                      key = {"technologies"}
+                      initial = {{opacity: 0}}
+                      animate = {{opacity: 1, transition: {delay: 0.2}}}
+                      exit = {{opacity: 0}}
+                      transition = {{duration: 0.2, ease: "easeInOut"}}
+                      onAnimationComplete={() => adjustHeight(technologiesRef)}
+                    >
+                      <textarea 
+                        ref = {technologiesRef}
+                        row = "1"
+                        className ={ styles.txtSubTitle }
+                        value = {description}
+                        onInput={() => adjustHeight(technologiesRef)}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required 
+                      />
+
+                      <div className = { styles.line }></div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                
+
+                <div className = { styles.infoBtn }>
+                  <ul className = { styles.btns }>
+                    <li>
+                      <span 
+                        className = { styles.descBtn }
+                        onClick = { isInfo ? handleInfoBtn : undefined }
+                      >
+                        DESCRIPTION
+                      </span>
+                    </li>
+                    <li>
+                      <span 
+                        className = { styles.techBtn }
+                        onClick = { !isInfo ? handleInfoBtn : undefined }
+                      >
+                          TECHNOLOGIES
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
+  </div>
 
       {/* <div className={styles.modalBackdrop}>
       <div className={styles.modalContent}>

@@ -145,11 +145,13 @@
   
           textarea {
             border: 1px solid $tertiary;
+            border-radius: 5px;
             color: $tertiary;
             font-size: 8px;
             margin-bottom: 15px;
             margin-top: 10px;
             height: 100%;
+            padding: 5px;
             resize: none;
             outline: transparent;
             overflow: hidden;
@@ -210,6 +212,21 @@
 .line { //line separator
   border-bottom: 1px solid $outOfFocus;
   width: 60%;
+}
+
+@media (min-width: 420px) {
+  .modalContainer {
+    .modalEditingSection {
+      .modal {
+        .headerBg {
+          margin: 0 0 20px 0; 
+          .txtTitle {
+            font-size: 25px;
+          }
+        }
+      }
+    }
+  }
 }
 
 @media (min-width: 768px) {

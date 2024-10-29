@@ -53,7 +53,14 @@ export default function UserDropdown({ handleClickOutside, isDropClicked }) {
                     >   
                         <div id = "dropdown" className = { styles.dropdownMenu } >
                             <div className = { styles.dropMenuTitle }>
-                                <span className = { styles.txtTitle }>Guest Account</span> {/* Will be changed to handle dynamic data */}
+                                <span className = { styles.txtTitle }>
+                                    {user?.role === "admin" 
+                                        ? <>Admin Account</> // replace with username
+                                        : user?.role === "staff"
+                                        ? <>Staff Account</>
+                                        : <>Guest Account</>
+                                    }
+                                </span> {/* Will be changed to handle dynamic data */}
                             </div>
                             <ul className = { styles.dropMenuList }>
                                 {/* If guest account is used */}

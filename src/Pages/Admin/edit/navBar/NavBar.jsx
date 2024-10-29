@@ -25,6 +25,8 @@ export default function NavBar () {
         //navigate('/'); // Redirect to home or login page after logout
     };
 
+    console.log (isNavBarActive);
+
     return (
         <>
             <AnimatePresence>
